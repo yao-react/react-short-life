@@ -1,5 +1,1 @@
-import { ShortLived } from './ShortLived';
-
-export { ShortLived };
-
-export default ShortLived;
+export { ShortLife } from './ShortLife';

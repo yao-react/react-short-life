@@ -1,53 +1,53 @@
-# React Short Lived
+# @yao-react/react-short-life
 
-Help maintain short-lived React component.
+Help maintain React component with short life.
 
 ## Motivation
 
-Some components, such as modal, pop menu and drawer, are short-lived, which means they may exist for long but will
-only be alive for a short time. Some of them hold a lot of data and state. We wish a fresh version of them when they
-come to alive, but want to clean them after they are totally dead.
+By [this article](https://www.differencebetween.com/difference-between-alive-and-vs-living/):
 
-## How it works
+- Living is just passing the days as a being breathing, eating, sleeping, etc.
+- Being alive is living at a higher level of consciousness and taking note of our surroundings.
 
-This package exposes a component `ShortLived` of render props pattern. You just set up start and end delays, turn it on and off, the
-render function will give you an `alive` as a hint, which you can use as `visible` or `open` prop for the inner component.
-After some time from being off, the inner component will be unmounted.
+Lots of react components are of short-life, such as popup menu, modal, drawer...
 
-![Lifetime](https://user-images.githubusercontent.com/3808838/94408158-fb76d500-01a6-11eb-9229-20fc8dbcc02d.jpeg)
+For them, the truthy prop `open/show/visible` means being alive, but they need longer lives than that:
 
-As the picture above shows, you can only care about `on` period and `delays`, this package will manage `delayed on`
-period, and during `living` period, your inner component keeps mounted, and during `alive` period, your inner component
-keeps alive/visible/open.
+- before alive, they may need to be initialized for some reason
+- after alive, they need some time to complete the closing animation
+
+However, we can't make them immortal for reasons such as memory optimization or refreshed starting status.
+
+`ShortLife` component is here to help us manage their short lives.
 
 ## Install
 
 ```
-yarn add react-short-lived
+npm install @yao-react/react-short-life
 ```
 
 ```
-npm install react-short-lived
+yarn add @yao-react/react-short-life
 ```
 
 ## Getting started
 
 ```tsx
 import { useState } from 'react';
-import { ShortLived } from 'react-short-lived';
+import { ShortLife } from '@yao-react/react-short-life';
 import { Modal } from 'some-package';
 
 function Demo() {
-  const [modalOn, setModalOn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   function handleClickButton() {
-    setModalOn(x => !x);
+    setShowModal(x => !x);
   }
 
   return (
     <div>
       <button onClick={handleClickButton}>Toggle modal</button>
-      <ShortLived on={modalOn} render={(alive) => <Modal visible={alive}/>}>
+      <ShortLife feeding={showModal} render={(alive) => <Modal visible={alive}/>}>
     </div>
   );
 }
@@ -55,25 +55,31 @@ function Demo() {
 
 ## Props
 
-| Name       | Type                                               | Default | Description                                                                                                                             |
-| ---------- | -------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| on         | boolean                                            | false   |                                                                                                                                         |
-| delayStart | number                                             | -1      | negative number means no timer and update state immediately, `null | undefined` means no timer and never update the state automatically |
-| delayEnd   | number                                             | 1000    | see above                                                                                                                               |
-| render     | (alive: boolean, kill: () => void) => ReactElement |         |                                                                                                                                         |
-| version    | number \| string                                   |         | see [Advanced](#Advanced)                                                                                                               |
+| Name        | Type                                     | Default | Description                                                  |
+| ----------- | ---------------------------------------- | ------- | ------------------------------------------------------------ |
+| feeding     | boolean                                  | false   |                                                              |
+| beforeAlive | number                                   | 0       | negative value means immediately and no timer will be set up |
+| beforeDead  | number                                   | 1000    | same as above                                                |
+| render      | (alive: boolean) => ReactElement \| null |         |                                                              |
 
-## Advanced
+## Metaphor
 
-## `version` prop
-
-Inside `ShortLived` it creates a new version for each true `on`, so that there is always a new mounted inner component for each `living` period.
-
-If you don't need this feature, you can set `version` to a fixed value, or control it by yourself.
-
-## `kill` method in `render` function
-
-Call this function to kill the current version of component.
+- Your component is not living at first
+  - `feeding` is `false`
+  - the `render` function is uncalled
+- You start to feed it
+  - set `feeding` to `true`
+  - the `render` function is called with `alive = false`
+- After some time of feeding, your component become alive
+  - the `render` function is called with `alive = true`
+  - the length of such time is specified by `beforeAlive`
+- Play with your component
+- When you feel bored, you stop feeding your component, though still living, it become hungry and not alive anymore
+  - set `feeding` to `false`
+  - the `render` function is called with `alive = false`
+- After some time of being hungry, your component die
+  - the `render` function is uncalled
+  - the length of such time is specified by `beforeDead`
 
 ## License
 

@@ -3152,6 +3152,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@yao-react/use-timeout@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@yao-react/use-timeout/-/use-timeout-0.1.0.tgz#de2f3376da0bf25ca058ec57c7041b8f75910a23"
+  integrity sha512-YhCsUTm8l/mQnqNAX3ImB+NQ1FtNGFbsSCIBDHbwpTfZj/Q948buLoSpqYa8aBGw5FvDdXTCW8tc01hVPlKNNg==
+
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
