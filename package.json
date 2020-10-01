@@ -1,7 +1,7 @@
 {
   "name": "@yao-react/react-short-life",
   "description": "Help maintain React component with short life.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "zhaoyao91",
   "main": "dist/index.js",
   "module": "dist/react-short-life.esm.js",

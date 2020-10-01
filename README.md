@@ -4,7 +4,7 @@ Help maintain React component with short life.
 
 ## Motivation
 
-By [this article](https://www.differencebetween.com/difference-between-alive-and-vs-living/):
+From [this article](https://www.differencebetween.com/difference-between-alive-and-vs-living/):
 
 - Living is just passing the days as a being breathing, eating, sleeping, etc.
 - Being alive is living at a higher level of consciousness and taking note of our surroundings.
